@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import '/src/scss/watch_effect.scss';
 
 
@@ -212,12 +212,16 @@ function applyWatch(element_minute: Animation,element_hour: Animation) {
 
 
 const WatchEffect = () => {
-    // const minute_needle = document.getElementsByClassName('rotates-minute')[0];
-    // const needle_animate_minute = minute_needle.animate(rotateSteps,rotateTimingMinute);
+    
 
-    // const hour_needle = document.getElementsByClassName('rotates-hour')[0];
-    // const needle_animate_hour = hour_needle.animate(rotateSteps,rotateTimingHour);
-    // applyWatch(needle_animate_minute,needle_animate_hour);
+    useEffect(() => {
+        const minute_needle = document.getElementsByClassName('rotates-minute')[0];
+        const needle_animate_minute = minute_needle.animate(rotateSteps,rotateTimingMinute);
+
+        const hour_needle = document.getElementsByClassName('rotates-hour')[0];
+        const needle_animate_hour = hour_needle.animate(rotateSteps,rotateTimingHour);
+        applyWatch(needle_animate_minute,needle_animate_hour);
+    }, []);
 
     return (
         <div id="circler">
@@ -248,5 +252,8 @@ const WatchEffect = () => {
         </div>
     )
 }
+
+
+
 
 export {WatchEffect}

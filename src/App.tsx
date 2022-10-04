@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { RegistDialog } from "./components/RegistDialog";
 import { WatchEffect } from "./components/WatchEffect";
+import {OptionSlide} from "./components/OptionSlide";
 
 interface app_state_type {
     // is_open: boolean;
@@ -24,6 +25,7 @@ const App = () => {
 	const [boxes,setBoxes] = useState<BoxType[]>([]);
 	const [is_dialog_open,setDialogOpen] = useState(true);
 	const [is_watch_enable,setWatchEnable] = useState(true);
+	const [is_option_open,setOptionOpen] = useState(false);
 	const dialogRef = useRef<RegistDialogRefType>();
 
 	const dialogCurrent = dialogRef.current;
@@ -35,6 +37,10 @@ const App = () => {
 	const closeDialog = () => {
 		setDialogOpen(false);
 	}
+
+    const toggleSlide = () => {
+        setOptionOpen(!is_option_open);
+    }
 
     const createBox = (box:BoxType,is_child:boolean) => {
         const name = box.name;
@@ -100,8 +106,8 @@ const App = () => {
 
         <div className="App">
             <header>
-                <button type="button" id="setting">
-                    <FontAwesomeIcon icon={["fas", "cog"]} />
+                <button type="button" id="setting" onClick={()=>toggleSlide()}>
+                    <FontAwesomeIcon icon={["fas", "cog"]}/>
                 </button>
             </header>
             {is_watch_enable &&
@@ -122,6 +128,9 @@ const App = () => {
                     }).join()}
                 </div>
             </main>
+            {is_option_open &&
+                <OptionSlide/>
+            }
             {is_dialog_open &&
                 <RegistDialog mode="normal" closeModal={closeDialog}/>
             }

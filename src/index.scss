@@ -2,10 +2,20 @@
 body {
     max-width: none;
     margin: 0;
-    display: flex;
+    padding: 0;
+    // display: flex;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    #root {
+        height: 100%;
+        width: 100%;
+        .App {
+            height: 100%;
+            width: 100%;
+            display: flex;
+        }
+    }
 }
 
 // set-various
@@ -199,59 +209,6 @@ main {
     
 }
 
-// Aside
-aside {
-    position: relative;
-    display: none;
-    // opacity: 0;
-    transform: translateX(400px);
-    transition: 0.3s;
-    width: 20%;
-    margin-left: auto;
-    background-color: rgba($color: #000000, $alpha: 80%);
-    border-left: solid 3px #a0ffd3;
-    padding: 1rem;
-    flex-direction: column;
-    &.show {
-        display: flex;
-    }
-    &.visible {
-        transform: translateX(0);
-    }
-    h2 {
-        color: #fff;
-    }
-    .json-import {
-        border-bottom: solid 2px #999;
-        padding-bottom: 1rem;
-        label {
-            color: #fff;
-        }
-        textarea {
-            margin-bottom: 1rem;
-        }
-        button {
-            background-color: rgb(58, 86, 245);
-            color: #fff;
-        }
-    }
-    .json-export {
-        border-bottom: solid 2px #999;
-        padding: 1rem 0;
-        button {
-            background-color: #187070;
-            color: #fff;
-        }
-    }
-    .setting-delete {
-        margin-top: auto;
-        padding: 1rem 0;
-        button {
-            background-color: #d63a47;
-            color: #fff;
-        }
-    }
-}
 
 #loader {
     display: none;
