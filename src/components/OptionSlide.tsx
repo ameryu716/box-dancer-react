@@ -13,7 +13,7 @@ const OptionSlide = ()=> {
 
         const value = jsonImportText;
         if(value !== null && value.length > 0){
-            localStorage.setItem("box-dancer-2022",value);
+            localStorage.setItem("box-dancer-2022-react",value);
             reload();
     
         }else{
@@ -23,7 +23,7 @@ const OptionSlide = ()=> {
     }
     
     const jsonExport = ()=>{
-        const json = localStorage.getItem("box-dancer-2022");
+        const json = localStorage.getItem("box-dancer-2022-react");
         if(json !== null){
             const blob = new Blob([json], { type: 'text/plain' });
             const aTag = document.createElement('a');
@@ -39,7 +39,7 @@ const OptionSlide = ()=> {
     
     const jsonDelete = ()=>{
         if(!confirm('ページ上の全てのデータを削除します。本当によろしいですか？')) return;
-        localStorage.removeItem('box-dancer-2022');
+        localStorage.removeItem('box-dancer-2022-react');
         reload();
     }
 
