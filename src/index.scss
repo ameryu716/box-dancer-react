@@ -1,8 +1,6 @@
 $dark: #222;
 $blue: #6495ed;
 
-
-
 // Reseter
 body {
     max-width: none;
@@ -54,8 +52,6 @@ header {
     }
 }
 
-
-
 // Main
 
 main {
@@ -86,6 +82,7 @@ main {
         }
     }
     .box {
+        transition: 0.5s;
         box-sizing: border-box;
         position: relative;
         padding: 0.5rem;
@@ -95,7 +92,7 @@ main {
         border-radius: 0.5rem;
         width: 120px;
         height: 120px;
-        
+
         &:nth-child(2n) {
             box-shadow: 0 0 1px 2px rgba(0, 255, 0, 0.6);
         }
@@ -155,26 +152,34 @@ main {
             border-radius: 0.3rem 0.3rem 0 0.3rem;
             // overflow: hidden;
             &::before {
-                content: '';
+                content: "";
                 z-index: 1;
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    position: absolute;
-    bottom: -25px;
-    right: -25px;
-    transform: rotateZ(45deg);
+                width: 50px;
+                height: 50px;
+                background-color: #fff;
+                position: absolute;
+                bottom: -25px;
+                right: -25px;
+                transform: rotateZ(45deg);
             }
             &::after {
-                content: '';
+                content: "";
                 z-index: 1;
-    width: 1px;
-    height: 50px;
-    background-color: #222;
-    position: absolute;
-    bottom: -8px;
-    right: 17px;
-    transform: rotateZ(45deg);
+                width: 1px;
+                height: 50px;
+                background-color: #222;
+                position: absolute;
+                bottom: -8px;
+                right: 17px;
+                transform: rotateZ(45deg);
+            }
+            .plus-icon {
+                position: absolute;
+                top: 5%;
+                right: 5%;
+                font-size: 1.5rem;
+                color: #444;
+                cursor: pointer;
             }
             .folder-icon {
                 position: absolute;
@@ -183,10 +188,15 @@ main {
                 font-size: 1.3rem;
                 color: #444;
             }
-            
+
             &.open {
                 // background-image: url(./assets/folder-open.svg);
                 // background-size: 110%;
+                transform: rotateZ(-450deg);
+                border-color: $blue;
+                &::after {
+                    background-color: $blue;
+                }
                 .folder-icon {
                     color: $blue;
                 }
@@ -212,18 +222,47 @@ main {
         }
 
         &.child {
-            transition: 0.5s;
+            // transition: 3s;
             display: none;
             opacity: 0;
             transform: translateY(-150px);
-
-            &.visible {
-                transform: translateY(0);
-                opacity: 1;
+            animation: fade-out 0.4s ease-in-out;
+            // animation-fill-mode: forwards;
+            // animation-duration: 3s;
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-150px);
+                }
+                1% {
+                    opacity: 0;
+                    transform: translateY(-150px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes fade-out {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                1% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-150px);
+                }
             }
 
-            &.show {
+            &.visible {
                 display: block;
+                opacity: 1;
+                transform: translateY(0);
+                animation: fade-in 0.4s ease-in-out;
             }
         }
 
@@ -246,10 +285,7 @@ main {
             }
         }
     }
-
-    
 }
-
 
 #loader {
     display: none;

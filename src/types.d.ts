@@ -9,7 +9,7 @@ interface folder_box_type {
     name: string,
     key: string,
     is_dir: boolean,
-    childs: []
+    childs: Array<link_box_type|folder_box_type>,
 }
 
 export {link_box_type,folder_box_type}

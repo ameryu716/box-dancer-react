@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
+import { folder_box_type, link_box_type } from "src/types";
 import '/src/scss/regist_dialog.scss';
 
 interface regist_dialog_prop_type {
@@ -7,7 +8,7 @@ interface regist_dialog_prop_type {
     closeModal: () => void,
     reload: () => void,
     mode: 'normal' | 'child',
-    parentTarget: string | null,
+    parentTargetKey: string | null,
 }
 
 interface regist_dialog_state_type {
@@ -35,21 +36,31 @@ const RegistDialog = (props:regist_dialog_prop_type) => {
     }
 
     const create = () => {
-        console.log(props.mode);
-        console.log('を作成する');
-
+        
         const json = localStorage.getItem("box-dancer-2022-react");
-        let json_data = [];
+        let json_data:Array<link_box_type|folder_box_type> = [];
         if (json !== null) {
             json_data = JSON.parse(json);
         }
 
-        json_data.push({
-            name: name,
-            link: link,
-            key: key,
-            is_dir: false,
-        });
+        if(props.parentTargetKey === null){
+            // 深度0
+            json_data.push({
+                name: name,
+                link: link,
+                key: key,
+                is_dir: false,
+            });
+            
+        }else{
+            const find = json_data.find(j => j.key === props.parentTargetKey) as folder_box_type;
+            find.childs.push({
+                name: name,
+                link: link,
+                key: key,
+                is_dir: false,
+            })
+        }
     
         const regist_json = JSON.stringify(json_data);
     
@@ -95,7 +106,7 @@ const RegistDialog = (props:regist_dialog_prop_type) => {
             {props.mode === 'child' && 
                 <div className="parent-target">
                     <span>親登録対象</span> 
-                    <span>{props.parentTarget}</span>
+                    <span>key:{props.parentTargetKey}</span>
                 </div>
             }
             <div className="name">
@@ -113,10 +124,12 @@ const RegistDialog = (props:regist_dialog_prop_type) => {
                 <label htmlFor="key">キー</label>
                 <input type="text" id="key"  value={key} onChange={(e) => setKey(e.target.value)}/>
             </div>
+            {props.mode === 'normal' &&
             <div className="mode-dir">
                 <label htmlFor="mode-dir">フォルダ</label>
                 <input type="checkbox" id="mode-dir"  checked={is_dir} onChange={(e) => setIsDir(e.target.checked)}/>
             </div>
+            }
             <div className="enter">
                 {is_dir &&
                 <button type="button" className="regist-folder-btn" onClick={() => createFolder()}>登録</button>
