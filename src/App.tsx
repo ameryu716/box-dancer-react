@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { RegistDialog } from "./components/RegistDialog";
 
@@ -17,7 +17,8 @@ const App = () => {
 	const [is_dialog_open,setDialogOpen] = useState(true);
 	const dialogRef = useRef<RegistDialogRefType>();
 
-	const dialogCurrent = dialogRef.current;
+	// const dialogCurrent = dialogRef.current;
+    const [loading,setLoading] = useState(true);
 
 	const openDialog = () => {
 		setDialogOpen(true);
@@ -26,6 +27,12 @@ const App = () => {
 	const closeDialog = () => {
 		setDialogOpen(false);
 	}
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(true);
+        }, 1000);
+    })
 
 	return (
             <div className="App">
@@ -74,6 +81,12 @@ const App = () => {
 				{is_dialog_open &&
 					<RegistDialog mode="normal" closeModal={closeDialog}/>
 				}
+                {loading &&
+                    <div className="loader">
+                        <span>Loading...</span>
+                        <img src="./assets/ball-triangle.svg" alt="loading-img" />
+                    </div>
+                }
             </div>
 	);
 
