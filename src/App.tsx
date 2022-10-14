@@ -197,7 +197,7 @@ const App = () => {
             )}
             {loading && (
                 <div id="loader" className="loading visible">
-                    <h1>Box Dancer</h1>
+                    <h1>Box Dancer R</h1>
                     <div className="ball">
                         <img
                             src="/src/assets/ball-triangle.svg"
