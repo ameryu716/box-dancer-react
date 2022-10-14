@@ -1,11 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import '/src/scss/option_slide.scss';
 
-// interface option_slide_props_type {
-//     is_open: boolean
-// }
+interface option_slide_prop_type {
+    reload: () => void
+}
 
-const OptionSlide = ()=> {
+const OptionSlide = (props:option_slide_prop_type)=> {
 
     const [jsonImportText,setJsonImportText] = useState('');
 
@@ -14,7 +14,7 @@ const OptionSlide = ()=> {
         const value = jsonImportText;
         if(value !== null && value.length > 0){
             localStorage.setItem("box-dancer-2022-react",value);
-            reload();
+            props.reload();
     
         }else{
             alert('登録がありません');
@@ -40,21 +40,8 @@ const OptionSlide = ()=> {
     const jsonDelete = ()=>{
         if(!confirm('ページ上の全てのデータを削除します。本当によろしいですか？')) return;
         localStorage.removeItem('box-dancer-2022-react');
-        reload();
+        props.reload();
     }
-
-    // const [classtext,setClassText] = useState('');
-
-    
-
-    // useLayoutEffect(() => {
-    //     if(props.is_open){
-    //         setClassText("visible");
-    //     }else{
-    //         setClassText('');
-    //     }
-    //   }, []);
-    
 
     return (
         <aside id="setting-area" className="visible">

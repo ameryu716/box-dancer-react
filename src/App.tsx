@@ -1,18 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
-import reactLogo from "./assets/react.svg";
+// import reactLogo from "./assets/react.svg";
 import { RegistDialog } from "./components/RegistDialog";
 import { WatchEffect } from "./components/WatchEffect";
 import { OptionSlide } from "./components/OptionSlide";
 import { folder_box_type, link_box_type } from "./types";
-
-interface app_state_type {
-    // is_open: boolean;
-}
-
-interface RegistDialogRefType {
-    openModal: void;
-}
 
 const App = () => {
     const [boxes, setBoxes] = useState<(link_box_type | folder_box_type)[]>([]);
@@ -22,6 +14,7 @@ const App = () => {
     const [propagate_parent_key, setParentKey] = useState<null | string>("");
     // const dialogRef = useRef<RegistDialogRefType>();
     const [regist_mode, setRegistMode] = useState<"normal" | "child">("normal");
+    const [loading,setLoading]= useState(true);
 
     // const dialogCurrent = dialogRef.current;
 
@@ -85,7 +78,7 @@ const App = () => {
                         {childs.map((c) => {
                             return createBox(c, true);
                         })}
-                    </ React.Fragment>
+                    </React.Fragment>
                 );
             } else {
                 return (
@@ -162,6 +155,9 @@ const App = () => {
 
     useEffect(() => {
         fetchBoxData();
+        setTimeout(() => {
+            setLoading(false);            
+        }, 500);
     }, []);
 
     return (
@@ -190,7 +186,7 @@ const App = () => {
                     })}
                 </div>
             </main>
-            {is_option_open && <OptionSlide />}
+            {is_option_open && <OptionSlide reload={fetchBoxData} />}
             {is_dialog_open && (
                 <RegistDialog
                     mode={regist_mode}
@@ -198,6 +194,17 @@ const App = () => {
                     reload={fetchBoxData}
                     parentTargetKey={propagate_parent_key}
                 />
+            )}
+            {loading && (
+                <div id="loader" className="loading visible">
+                    <h1>Box Dancer</h1>
+                    <div className="ball">
+                        <img
+                            src="/src/assets/ball-triangle.svg"
+                            alt="svg-loader"
+                        />
+                    </div>
+                </div>
             )}
         </div>
     );

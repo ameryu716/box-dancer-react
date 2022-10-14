@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="230" height="230" viewBox="0 0 230 230">
+  <defs>
+    <clipPath id="clip-react-box-dancer-fv">
+      <rect width="230" height="230"/>
+    </clipPath>
+  </defs>
+  <g id="react-box-dancer-fv" clip-path="url(#clip-react-box-dancer-fv)">
+    <g id="グループ_1" data-name="グループ 1" transform="translate(-26 -12.236)">
+      <path id="パス_1" data-name="パス 1" d="M128,46.427v61.9L66,166.584V98.316Z" transform="translate(-2 -5)" fill="none" stroke="#009b8b" stroke-width="3"/>
+      <path id="パス_2" data-name="パス 2" d="M66,188.894l60.992,43.7L181.728,183.5l-56.9-58.716,2.159-79.721,73.737,77.833-7.621,50.136" transform="translate(19 -22.826)" fill="none" stroke="#03eed6" stroke-width="3"/>
+      <g id="長方形_1" data-name="長方形 1" transform="translate(109.716 152) rotate(-45)" fill="#fff" stroke="#040082" stroke-width="2">
+        <rect width="40" height="40" stroke="none"/>
+        <rect x="1" y="1" width="38" height="38" fill="none"/>
+      </g>
+      <ellipse id="楕円形_1" data-name="楕円形 1" cx="86.5" cy="9" rx="86.5" ry="9" transform="translate(55 214)" fill="rgba(0,0,0,0.7)"/>
+    </g>
+  </g>
+</svg>
